@@ -2,9 +2,8 @@ import { useState, useEffect, useCallback } from "react";
 import {
   supabase, signIn, signUp, signOut, getSession,
   getEmployees, addEmployee, updateEmployee, deleteEmployee,
-  getJobs, addJob, updateJob,
+  getJobs, addJob,
   getTickets, addTicket, updateTicket,
-  getAnnouncements,
   getPayroll, runPayroll,
   getAnalytics,
 } from "./supabase";
