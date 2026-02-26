@@ -145,8 +145,6 @@ const SignIn = ({ onLogin }) => {
     }, 900);
   };
 
-  const dots = Array.from({ length: 60 });
-
   return (
     <div style={{ minHeight: "100vh", background: C.bg, display: "flex", position: "relative", overflow: "hidden" }}>
 
