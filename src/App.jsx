@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import {
-  supabase, signIn, signUp, signOut,
+  supabase, signIn, signUp, signOut, getSession,
   getEmployees, addEmployee, updateEmployee, deleteEmployee,
   getJobs, addJob, updateJob,
   getTickets, addTicket, updateTicket,
@@ -10,7 +10,8 @@ import {
 } from "./supabase";
 
 // ═══════════════════════════════════════════════════════════════
-// NEXUS HR v2.0 — Real Backend (Supabase)
+// FARIK — Open Source HR Platform
+// v2.0 — Real Backend (Supabase)
 // ═══════════════════════════════════════════════════════════════
 
 const C = {
@@ -211,9 +212,9 @@ const AuthScreen = ({ onAuth }) => {
 
         <div style={{ position: "relative", zIndex: 2 }}>
           <div style={{ ...fu(.05), display:"flex",alignItems:"center",gap:16,marginBottom:52 }}>
-            <div style={{ width:52,height:52,borderRadius:14,background:`linear-gradient(135deg,${C.accent},${C.blue})`,display:"flex",alignItems:"center",justifyContent:"center",fontFamily:FD,fontWeight:900,color:"#000",fontSize:22,boxShadow:`0 0 28px ${C.accent}44`,animation:"float 4s ease-in-out infinite" }}>N</div>
+            <div style={{ width:52,height:52,borderRadius:14,background:`linear-gradient(135deg,${C.accent},${C.blue})`,display:"flex",alignItems:"center",justifyContent:"center",fontFamily:FD,fontWeight:900,color:"#000",fontSize:22,boxShadow:`0 0 28px ${C.accent}44`,animation:"float 4s ease-in-out infinite" }}>F</div>
             <div>
-              <div style={{ fontFamily:FD,fontWeight:900,fontSize:20,color:C.text,letterSpacing:"-0.02em" }}>NEXUS HR</div>
+              <div style={{ fontFamily:FD,fontWeight:900,fontSize:20,color:C.text,letterSpacing:"-0.02em" }}>Farik</div>
               <div style={{ fontFamily:FM,fontSize:9,color:C.accent,letterSpacing:"0.2em",marginTop:2 }}>OPEN SOURCE · v2.0</div>
             </div>
           </div>
@@ -271,7 +272,7 @@ const AuthScreen = ({ onAuth }) => {
               {mode === "signin" ? "Welcome back" : "Get started free"}
             </div>
             <div style={{ fontFamily:FM,fontSize:12,color:C.textMuted }}>
-              {mode === "signin" ? "Sign in to your workspace" : "Create your free Nexus HR workspace"}
+              {mode === "signin" ? "Sign in to your workspace" : "Create your free Farik workspace"}
             </div>
           </div>
 
@@ -305,9 +306,9 @@ const AuthScreen = ({ onAuth }) => {
           </div>
 
           <div style={{ ...fu(.5),marginTop:24,textAlign:"center" }}>
-            <a href="https://github.com/SamoTech/nexus-hr" target="_blank" rel="noreferrer"
+            <a href="https://github.com/SamoTech/farik" target="_blank" rel="noreferrer"
               style={{ fontFamily:FM,fontSize:10,color:C.textDim,textDecoration:"none" }}>
-              ★ github.com/SamoTech/nexus-hr · MIT License
+              ★ github.com/SamoTech/farik · MIT License
             </a>
           </div>
         </div>
@@ -338,9 +339,9 @@ const Sidebar = ({ active, setActive, isPro, user, onLogout }) => {
       display:"flex",flexDirection:"column",height:"100vh",position:"sticky",top:0,flexShrink:0 }}>
       <div style={{ padding:"22px 18px 16px",borderBottom:`1px solid ${C.border}`,display:"flex",alignItems:"center",gap:12 }}>
         <div style={{ width:34,height:34,borderRadius:9,background:`linear-gradient(135deg,${C.accent},${C.blue})`,
-          display:"flex",alignItems:"center",justifyContent:"center",fontFamily:FD,fontWeight:900,color:"#000",fontSize:15 }}>N</div>
+          display:"flex",alignItems:"center",justifyContent:"center",fontFamily:FD,fontWeight:900,color:"#000",fontSize:15 }}>F</div>
         <div>
-          <div style={{ fontFamily:FD,fontWeight:900,fontSize:15,color:C.text,letterSpacing:"-0.02em" }}>NEXUS HR</div>
+          <div style={{ fontFamily:FD,fontWeight:900,fontSize:15,color:C.text,letterSpacing:"-0.02em" }}>Farik</div>
           <div style={{ fontFamily:FM,fontSize:9,color:C.accent,letterSpacing:"0.15em" }}>v2.0 LIVE</div>
         </div>
       </div>
@@ -373,7 +374,7 @@ const Sidebar = ({ active, setActive, isPro, user, onLogout }) => {
       {!isPro && (
         <div style={{ padding:"10px 10px",borderTop:`1px solid ${C.border}` }}>
           <div style={{ background:C.goldDim,border:`1px solid ${C.gold}30`,borderRadius:10,padding:"12px" }}>
-            <div style={{ fontFamily:FM,fontSize:9,color:C.gold,fontWeight:700,letterSpacing:"0.12em",marginBottom:4 }}>⭐ NEXUS PRO</div>
+            <div style={{ fontFamily:FM,fontSize:9,color:C.gold,fontWeight:700,letterSpacing:"0.12em",marginBottom:4 }}>⭐ FARIK PRO</div>
             <div style={{ fontFamily:FM,fontSize:11,color:C.textMuted,marginBottom:10 }}>AI analytics, payroll engine & more</div>
             <button style={{ width:"100%",background:C.gold,color:"#000",border:"none",borderRadius:6,padding:"7px",fontFamily:FM,fontWeight:700,fontSize:11,cursor:"pointer" }}>Upgrade →</button>
           </div>
@@ -1113,7 +1114,7 @@ const Settings = ({ user }) => (
         </div>
         <div style={{ background:C.accentDim,border:`1px solid ${C.accent}33`,borderRadius:8,padding:"12px 16px" }}>
           <div style={{ fontFamily:FM,fontSize:12,fontWeight:700,color:C.accent,marginBottom:4 }}>🔓 Open Source</div>
-          <div style={{ fontFamily:FM,fontSize:11,color:C.textMuted }}>Nexus HR is MIT licensed. Fork, self-host, or contribute at <a href="https://github.com/SamoTech/nexus-hr" target="_blank" rel="noreferrer" style={{ color:C.accent }}>github.com/SamoTech/nexus-hr</a></div>
+          <div style={{ fontFamily:FM,fontSize:11,color:C.textMuted }}>Farik is MIT licensed. Fork, self-host, or contribute at <a href="https://github.com/SamoTech/farik" target="_blank" rel="noreferrer" style={{ color:C.accent }}>github.com/SamoTech/farik</a></div>
         </div>
       </div>
     </div>
@@ -1161,7 +1162,7 @@ export default function App() {
       <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
       <div style={{ textAlign:"center" }}>
         <div style={{ width:40,height:40,border:`3px solid ${C.accent}33`,borderTopColor:C.accent,borderRadius:"50%",animation:"spin .8s linear infinite",margin:"0 auto 16px" }} />
-        <div style={{ fontFamily:FM,fontSize:12,color:C.textMuted }}>Loading Nexus HR...</div>
+        <div style={{ fontFamily:FM,fontSize:12,color:C.textMuted }}>Loading Farik...</div>
       </div>
     </div>
   );
